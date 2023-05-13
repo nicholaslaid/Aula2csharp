@@ -1,0 +1,8 @@
+--Drop table if exists products;
+Create table if not exists products (
+id serial primary key,
+	name Varchar(50),
+	model Varchar(50),
+	quantity Integer,
+	value real
+); 
