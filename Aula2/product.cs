@@ -48,6 +48,80 @@ namespace Aula2
             return result;
         }
 
+        public product Get(int id)
+        {
+            product result = new product();
+            databaseacess dba = new databaseacess();
+
+            try
+            {
+                using(NpgsqlCommand cmd = new NpgsqlCommand())
+                {
+                    cmd.CommandText = @"SELECT * FROM products " +
+                                      @"WHERE id = @id;";
+
+                    using(cmd.Connection = dba.OpenConnection())
+                    using(NpgsqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            result.id = Convert.ToInt32(reader["id"]);
+                            result.name = reader["name"].ToString();
+                            result.model = reader["model"].ToString();
+                            result.quantity = Convert.ToInt32(reader["quantity"]);
+                            result.value = float.Parse(reader["value"].ToString()); 
+
+                        }
+                    }
+                }
+            }
+            catch ( Exception ex)
+            {
+
+                
+            }
+            return result;
+        }
+
+        public List<product> GetALL() {
+
+            List<product> result = new List<product>();
+            databaseacess dba = new databaseacess();
+
+            try
+            {
+                using (NpgsqlCommand cmd = new NpgsqlCommand())
+                {
+                    cmd.CommandText = @"SELECT * FROM products;";
+
+                    using (cmd.Connection = dba.OpenConnection())
+                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            product product = new product();
+
+                            product.id = Convert.ToInt32(reader["id"]);
+                            product.name = reader["name"].ToString();
+                            product.model = reader["model"].ToString();
+                            product.quantity = Convert.ToInt32(reader["quantity"]);
+                            product.value = float.Parse(reader["value"].ToString());
+
+                            result.Add(product);
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+            return result;
+
+        }
+
 
 
 
