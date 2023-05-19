@@ -60,6 +60,8 @@ namespace Aula2
                     cmd.CommandText = @"SELECT * FROM products " +
                                       @"WHERE id = @id;";
 
+                    cmd.Parameters.AddWithValue("@id", id);
+
                     using(cmd.Connection = dba.OpenConnection())
                     using(NpgsqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -118,6 +120,8 @@ namespace Aula2
 
 
             }
+            
+
             return result;
 
         }
