@@ -34,12 +34,14 @@
             lblQtd = new Label();
             lblValor = new Label();
             btnAdd = new Button();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
+            txtQuantity = new TextBox();
+            txtValue = new TextBox();
+            txtName = new TextBox();
+            txtModel = new TextBox();
+            txtId = new TextBox();
             dgvProdutos = new DataGridView();
+            btnDelete = new Button();
+            btnAlterar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvProdutos).BeginInit();
             SuspendLayout();
             // 
@@ -90,7 +92,7 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(158, 362);
+            btnAdd.Location = new Point(203, 341);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(112, 34);
             btnAdd.TabIndex = 5;
@@ -98,63 +100,91 @@
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
-            // textBox1
+            // txtQuantity
             // 
-            textBox1.Location = new Point(143, 218);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(150, 31);
-            textBox1.TabIndex = 6;
+            txtQuantity.Location = new Point(143, 218);
+            txtQuantity.Name = "txtQuantity";
+            txtQuantity.Size = new Size(150, 31);
+            txtQuantity.TabIndex = 6;
             // 
-            // textBox2
+            // txtValue
             // 
-            textBox2.Location = new Point(143, 273);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(150, 31);
-            textBox2.TabIndex = 7;
+            txtValue.Location = new Point(143, 273);
+            txtValue.Name = "txtValue";
+            txtValue.Size = new Size(150, 31);
+            txtValue.TabIndex = 7;
             // 
-            // textBox3
+            // txtName
             // 
-            textBox3.Location = new Point(143, 105);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(150, 31);
-            textBox3.TabIndex = 8;
+            txtName.Location = new Point(143, 105);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(150, 31);
+            txtName.TabIndex = 8;
             // 
-            // textBox4
+            // txtModel
             // 
-            textBox4.Location = new Point(143, 157);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(150, 31);
-            textBox4.TabIndex = 9;
+            txtModel.Location = new Point(143, 157);
+            txtModel.Name = "txtModel";
+            txtModel.Size = new Size(150, 31);
+            txtModel.TabIndex = 9;
             // 
-            // textBox5
+            // txtId
             // 
-            textBox5.Location = new Point(143, 57);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(150, 31);
-            textBox5.TabIndex = 10;
+            txtId.Location = new Point(143, 57);
+            txtId.Name = "txtId";
+            txtId.Size = new Size(150, 31);
+            txtId.TabIndex = 10;
             // 
             // dgvProdutos
             // 
+            dgvProdutos.AllowUserToAddRows = false;
+            dgvProdutos.AllowUserToDeleteRows = false;
+            dgvProdutos.AllowUserToResizeColumns = false;
+            dgvProdutos.AllowUserToResizeRows = false;
             dgvProdutos.BackgroundColor = SystemColors.ActiveCaptionText;
             dgvProdutos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvProdutos.Location = new Point(374, 40);
+            dgvProdutos.MultiSelect = false;
             dgvProdutos.Name = "dgvProdutos";
             dgvProdutos.RowHeadersWidth = 62;
             dgvProdutos.RowTemplate.Height = 33;
+            dgvProdutos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvProdutos.Size = new Size(652, 356);
             dgvProdutos.TabIndex = 11;
+            dgvProdutos.CellClick += dgvProdutos_CellClick;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(38, 341);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(112, 34);
+            btnDelete.TabIndex = 12;
+            btnDelete.Text = "Deletar";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // btnAlterar
+            // 
+            btnAlterar.Location = new Point(118, 392);
+            btnAlterar.Name = "btnAlterar";
+            btnAlterar.Size = new Size(112, 34);
+            btnAlterar.TabIndex = 13;
+            btnAlterar.Text = "Alterar";
+            btnAlterar.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1052, 450);
+            Controls.Add(btnAlterar);
+            Controls.Add(btnDelete);
             Controls.Add(dgvProdutos);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(txtId);
+            Controls.Add(txtModel);
+            Controls.Add(txtName);
+            Controls.Add(txtValue);
+            Controls.Add(txtQuantity);
             Controls.Add(btnAdd);
             Controls.Add(lblValor);
             Controls.Add(lblQtd);
@@ -176,11 +206,13 @@
         private Label lblQtd;
         private Label lblValor;
         private Button btnAdd;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
+        private TextBox txtQuantity;
+        private TextBox txtValue;
+        private TextBox txtName;
+        private TextBox txtModel;
+        private TextBox txtId;
         private DataGridView dgvProdutos;
+        private Button btnDelete;
+        private Button btnAlterar;
     }
 }

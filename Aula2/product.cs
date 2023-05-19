@@ -126,9 +126,67 @@ namespace Aula2
 
         }
 
+        public bool Delete(int id)
+        {
+            bool result = false;
+            databaseacess dba = new databaseacess();
 
+            try
+            {
+                using(NpgsqlCommand cmd = new NpgsqlCommand()) 
+                {
+                    cmd.CommandText = @"DELETE FROM products " +
+                                      @"WHERE id = @id;";
 
+                    cmd.Parameters.AddWithValue("@id", id);
 
+                    using(cmd.Connection = dba.OpenConnection())
+                    {
+                        cmd.ExecuteNonQuery();
+                        result = true;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {  
+
+            }
+
+            return result;
+        }
+
+        public bool Update(product product)
+        {
+
+            bool result = false;
+            databaseacess dba = new databaseacess();
+
+            try
+            {
+                using(NpgsqlCommand cmd = new NpgsqlCommand())
+                {
+                    cmd.CommandText = @"UPDATE products " +
+                                      @"SET name = @name, model = @model, quantity = @quantity, value = @value " +
+                                      @"WHERE id = @id;";
+
+                    cmd.Parameters.AddWithValue("@id", product.id);
+                    cmd.Parameters.AddWithValue("@name", product.name);
+                    cmd.Parameters.AddWithValue("@model", product.model);
+                    cmd.Parameters.AddWithValue("@quantity", product.quantity);
+                    cmd.Parameters.AddWithValue("@value", product.value);
+
+                    using(cmd.Connection = dbacess.OpenConnection())
+                    {
+                        cmd.ExecuteNonQuery() ;
+                        result = true;
+                    }
+                }
+            }
+            catch (Exception)
+            { }
+            return result;
+        }
 
     }
 }

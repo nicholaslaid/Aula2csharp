@@ -71,13 +71,14 @@ namespace Aula2
                                                       MessageBoxButtons.YesNo,
                                                       MessageBoxIcon.Question);
 
-                if(dialog == DialogResult.Yes)
+                if (dialog == DialogResult.Yes)
                 {
                     product product = new product();
                     int id = Convert.ToInt32(txtId.Text);
                     bool response = product.Delete(id);
 
-                    if(!response) {
+                    if (!response)
+                    {
                         MessageBox.Show("Erro ao tentar excluir");
                     }
                     else
@@ -89,7 +90,7 @@ namespace Aula2
             catch (Exception)
             {
 
-                
+
             }
 
 
