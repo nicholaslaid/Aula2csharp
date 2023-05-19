@@ -42,6 +42,7 @@
             dgvProdutos = new DataGridView();
             btnDelete = new Button();
             btnAlterar = new Button();
+            btnClear = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvProdutos).BeginInit();
             SuspendLayout();
             // 
@@ -130,6 +131,7 @@
             // 
             // txtId
             // 
+            txtId.Enabled = false;
             txtId.Location = new Point(143, 57);
             txtId.Name = "txtId";
             txtId.Size = new Size(150, 31);
@@ -165,18 +167,31 @@
             // 
             // btnAlterar
             // 
-            btnAlterar.Location = new Point(118, 392);
+            btnAlterar.Location = new Point(203, 394);
             btnAlterar.Name = "btnAlterar";
             btnAlterar.Size = new Size(112, 34);
             btnAlterar.TabIndex = 13;
             btnAlterar.Text = "Alterar";
             btnAlterar.UseVisualStyleBackColor = true;
+            btnAlterar.Click += btnAlterar_Click;
+            // 
+            // btnClear
+            // 
+            btnClear.Location = new Point(38, 394);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(112, 34);
+            btnClear.TabIndex = 14;
+            btnClear.Text = "Limpar";
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
             // Form1
             // 
+            AcceptButton = btnAdd;
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1052, 450);
+            Controls.Add(btnClear);
             Controls.Add(btnAlterar);
             Controls.Add(btnDelete);
             Controls.Add(dgvProdutos);
@@ -214,5 +229,6 @@
         private DataGridView dgvProdutos;
         private Button btnDelete;
         private Button btnAlterar;
+        private Button btnClear;
     }
 }

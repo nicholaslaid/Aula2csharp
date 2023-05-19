@@ -25,9 +25,9 @@ namespace Aula2
             {
                 using(NpgsqlCommand cmd= new NpgsqlCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO products" +
-                        @"(name, model, quantity, value)" +
-                        @"VALUES" +
+                    cmd.CommandText = @"INSERT INTO products " +
+                        @"(name, model, quantity, value) " +
+                        @"VALUES " +
                         @"(@name, @model, @quantity, @value);";
 
                     cmd.Parameters.AddWithValue("@name", product.name);
@@ -42,7 +42,7 @@ namespace Aula2
                     }
                 }
             }
-            catch { 
+            catch (Exception ex) { 
 
             }
             return result;
@@ -176,7 +176,7 @@ namespace Aula2
                     cmd.Parameters.AddWithValue("@quantity", product.quantity);
                     cmd.Parameters.AddWithValue("@value", product.value);
 
-                    using(cmd.Connection = dbacess.OpenConnection())
+                    using(cmd.Connection = dba.OpenConnection())
                     {
                         cmd.ExecuteNonQuery() ;
                         result = true;
