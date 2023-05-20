@@ -94,7 +94,7 @@ namespace Aula2
             {
                 using (NpgsqlCommand cmd = new NpgsqlCommand())
                 {
-                    cmd.CommandText = @"SELECT * FROM products;";
+                    cmd.CommandText = @"SELECT * FROM products ORDER BY id;";
 
                     using (cmd.Connection = dba.OpenConnection())
                     using (NpgsqlDataReader reader = cmd.ExecuteReader())
@@ -185,6 +185,32 @@ namespace Aula2
             }
             catch (Exception)
             { }
+            return result;
+        }
+
+        public int Count()
+        {
+            int result = 0;
+            databaseacess dba = new databaseacess();
+
+            try
+            {
+                using(NpgsqlCommand cmd = new NpgsqlCommand())
+                {
+                    cmd.CommandText = @"SELECT COUNT(id) FROM products;";
+
+                    using(cmd.Connection = dba.OpenConnection())
+                    {
+                        result = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                
+            }
+
             return result;
         }
 

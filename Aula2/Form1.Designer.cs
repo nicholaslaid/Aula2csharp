@@ -43,6 +43,7 @@
             btnDelete = new Button();
             btnAlterar = new Button();
             btnClear = new Button();
+            lblCount = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvProdutos).BeginInit();
             SuspendLayout();
             // 
@@ -185,12 +186,22 @@
             btnClear.UseVisualStyleBackColor = true;
             btnClear.Click += btnClear_Click;
             // 
+            // lblCount
+            // 
+            lblCount.AutoSize = true;
+            lblCount.Location = new Point(1002, 416);
+            lblCount.Name = "lblCount";
+            lblCount.Size = new Size(24, 25);
+            lblCount.TabIndex = 15;
+            lblCount.Text = "...";
+            // 
             // Form1
             // 
             AcceptButton = btnAdd;
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1052, 450);
+            Controls.Add(lblCount);
             Controls.Add(btnClear);
             Controls.Add(btnAlterar);
             Controls.Add(btnDelete);
@@ -230,5 +241,6 @@
         private Button btnDelete;
         private Button btnAlterar;
         private Button btnClear;
+        private Label lblCount;
     }
 }

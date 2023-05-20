@@ -8,6 +8,7 @@ namespace Aula2
         {
             InitializeComponent();
             LoadProducts();
+            CountProducts();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -33,6 +34,7 @@ namespace Aula2
             {
                 LoadProducts();
                 ClearForm();
+                CountProducts();
             }
 
         }
@@ -98,6 +100,7 @@ namespace Aula2
                     else
                     {
                         LoadProducts();
+                        CountProducts();
                     }
                 }
             }
@@ -152,6 +155,12 @@ namespace Aula2
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearForm();
+        }
+
+        private void CountProducts()
+        {
+            product producto = new product();
+            lblCount.Text = producto.Count().ToString();
         }
     }
 
