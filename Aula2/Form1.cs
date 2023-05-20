@@ -162,6 +162,26 @@ namespace Aula2
             product producto = new product();
             lblCount.Text = producto.Count().ToString();
         }
+
+        private void ExemploConversa()
+        {
+            string valorEntrada = "";
+
+            //Valores inteiros
+            short leituraShort = Convert.ToInt16(valorEntrada);
+            int leituraInt = Convert.ToInt32(valorEntrada); 
+            long leituraLong = Convert.ToInt64(valorEntrada);
+
+            //valores decimais
+            float leituraFloat = float.Parse(valorEntrada);
+            double leituraDouble = double.Parse(valorEntrada);
+
+            //Boolean
+            bool leituraBool = Convert.ToBoolean(valorEntrada); 
+
+            //Data, hora, data e hora
+            DateTime leituraDateTime = Convert.ToDateTime(valorEntrada);
+        }
     }
 
 
