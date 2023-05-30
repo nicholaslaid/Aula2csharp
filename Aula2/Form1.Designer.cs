@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             lblId = new Label();
             lblName = new Label();
             lblModelo = new Label();
@@ -40,10 +42,18 @@
             txtModel = new TextBox();
             txtId = new TextBox();
             dgvProdutos = new DataGridView();
+            id = new DataGridViewTextBoxColumn();
+            name = new DataGridViewTextBoxColumn();
+            model = new DataGridViewTextBoxColumn();
+            value = new DataGridViewTextBoxColumn();
+            quantity = new DataGridViewTextBoxColumn();
+            edit = new DataGridViewButtonColumn();
+            delete = new DataGridViewButtonColumn();
             btnDelete = new Button();
             btnAlterar = new Button();
             btnClear = new Button();
             lblCount = new Label();
+            cbNacional = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)dgvProdutos).BeginInit();
             SuspendLayout();
             // 
@@ -94,7 +104,7 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(203, 341);
+            btnAdd.Location = new Point(143, 367);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(112, 34);
             btnAdd.TabIndex = 5;
@@ -146,19 +156,95 @@
             dgvProdutos.AllowUserToResizeRows = false;
             dgvProdutos.BackgroundColor = SystemColors.ActiveCaptionText;
             dgvProdutos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvProdutos.Location = new Point(374, 40);
+            dgvProdutos.Columns.AddRange(new DataGridViewColumn[] { id, name, model, value, quantity, edit, delete });
+            dgvProdutos.Location = new Point(316, 45);
             dgvProdutos.MultiSelect = false;
             dgvProdutos.Name = "dgvProdutos";
+            dgvProdutos.ReadOnly = true;
             dgvProdutos.RowHeadersWidth = 62;
             dgvProdutos.RowTemplate.Height = 33;
             dgvProdutos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvProdutos.Size = new Size(652, 356);
+            dgvProdutos.Size = new Size(965, 356);
             dgvProdutos.TabIndex = 11;
             dgvProdutos.CellClick += dgvProdutos_CellClick;
             // 
+            // id
+            // 
+            id.DataPropertyName = "id";
+            id.HeaderText = "Identificador";
+            id.MinimumWidth = 8;
+            id.Name = "id";
+            id.ReadOnly = true;
+            id.Visible = false;
+            id.Width = 150;
+            // 
+            // name
+            // 
+            name.DataPropertyName = "name";
+            name.HeaderText = "Nome";
+            name.MinimumWidth = 8;
+            name.Name = "name";
+            name.ReadOnly = true;
+            name.Width = 150;
+            // 
+            // model
+            // 
+            model.DataPropertyName = "model";
+            model.HeaderText = "Modelo";
+            model.MinimumWidth = 8;
+            model.Name = "model";
+            model.ReadOnly = true;
+            model.Width = 150;
+            // 
+            // value
+            // 
+            value.DataPropertyName = "value";
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            value.DefaultCellStyle = dataGridViewCellStyle1;
+            value.HeaderText = "Valor";
+            value.MinimumWidth = 8;
+            value.Name = "value";
+            value.ReadOnly = true;
+            value.Width = 150;
+            // 
+            // quantity
+            // 
+            quantity.DataPropertyName = "quantity";
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            quantity.DefaultCellStyle = dataGridViewCellStyle2;
+            quantity.HeaderText = "Quantidade";
+            quantity.MinimumWidth = 8;
+            quantity.Name = "quantity";
+            quantity.ReadOnly = true;
+            quantity.Width = 150;
+            // 
+            // edit
+            // 
+            edit.HeaderText = "Edição";
+            edit.MinimumWidth = 8;
+            edit.Name = "edit";
+            edit.ReadOnly = true;
+            edit.Text = "Editar";
+            edit.UseColumnTextForButtonValue = true;
+            edit.Width = 150;
+            // 
+            // delete
+            // 
+            delete.HeaderText = "Exclusão";
+            delete.MinimumWidth = 8;
+            delete.Name = "delete";
+            delete.ReadOnly = true;
+            delete.Text = "Excluir";
+            delete.UseColumnTextForButtonValue = true;
+            delete.Width = 150;
+            // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(38, 341);
+            btnDelete.Location = new Point(143, 409);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(112, 34);
             btnDelete.TabIndex = 12;
@@ -168,7 +254,7 @@
             // 
             // btnAlterar
             // 
-            btnAlterar.Location = new Point(203, 394);
+            btnAlterar.Location = new Point(143, 451);
             btnAlterar.Name = "btnAlterar";
             btnAlterar.Size = new Size(112, 34);
             btnAlterar.TabIndex = 13;
@@ -178,9 +264,9 @@
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(38, 394);
+            btnClear.Location = new Point(16, 367);
             btnClear.Name = "btnClear";
-            btnClear.Size = new Size(112, 34);
+            btnClear.Size = new Size(112, 118);
             btnClear.TabIndex = 14;
             btnClear.Text = "Limpar";
             btnClear.UseVisualStyleBackColor = true;
@@ -189,18 +275,29 @@
             // lblCount
             // 
             lblCount.AutoSize = true;
-            lblCount.Location = new Point(1002, 416);
+            lblCount.Location = new Point(1280, 416);
             lblCount.Name = "lblCount";
             lblCount.Size = new Size(24, 25);
             lblCount.TabIndex = 15;
             lblCount.Text = "...";
+            // 
+            // cbNacional
+            // 
+            cbNacional.AutoSize = true;
+            cbNacional.Location = new Point(143, 321);
+            cbNacional.Name = "cbNacional";
+            cbNacional.Size = new Size(106, 29);
+            cbNacional.TabIndex = 16;
+            cbNacional.Text = "Nacional";
+            cbNacional.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             AcceptButton = btnAdd;
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1052, 450);
+            ClientSize = new Size(1316, 512);
+            Controls.Add(cbNacional);
             Controls.Add(lblCount);
             Controls.Add(btnClear);
             Controls.Add(btnAlterar);
@@ -242,5 +339,13 @@
         private Button btnAlterar;
         private Button btnClear;
         private Label lblCount;
+        private DataGridViewTextBoxColumn id;
+        private DataGridViewTextBoxColumn name;
+        private DataGridViewTextBoxColumn model;
+        private DataGridViewTextBoxColumn value;
+        private DataGridViewTextBoxColumn quantity;
+        private DataGridViewButtonColumn edit;
+        private DataGridViewButtonColumn delete;
+        private CheckBox cbNacional;
     }
 }

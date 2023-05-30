@@ -11,6 +11,9 @@ namespace Aula2
             CountProducts();
         }
 
+
+        #region Eventos
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
 
@@ -20,6 +23,7 @@ namespace Aula2
             product.model = txtModel.Text;
             product.quantity = Convert.ToInt32(txtQuantity.Text);
             product.value = float.Parse(txtValue.Text);
+            product.national = Convert.ToBoolean(cbNacional.Checked);
 
 
             bool response = product.Add(product);
@@ -39,23 +43,6 @@ namespace Aula2
 
         }
 
-        private void LoadProducts()
-        {
-            product product = new product();
-            dgvProdutos.DataSource = product.GetALL();
-        }
-
-        private void ClearForm()
-        {
-            txtName.Clear();
-            txtModel.Clear();
-            txtQuantity.Clear();
-            txtValue.Clear();
-            txtId.Clear();
-
-            txtName.Focus();
-        }
-
         private void dgvProdutos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -63,15 +50,48 @@ namespace Aula2
                 product producto = new product();
 
                 int id = Convert.ToInt32(
-                    dgvProdutos.Rows[dgvProdutos.CurrentRow.Index].Cells[0].Value);
+                    dgvProdutos.Rows[dgvProdutos.CurrentRow.Index].Cells["id"].Value);
 
-                producto = producto.Get(id);
+                if (e.ColumnIndex == dgvProdutos.Columns["edit"].Index)
+                {
 
-                txtId.Text = producto.id.ToString();
-                txtName.Text = producto.name.ToString();
-                txtModel.Text = producto.model.ToString();
-                txtQuantity.Text = producto.quantity.ToString();
-                txtValue.Text = producto.value.ToString();
+                    producto = producto.Get(id);
+
+                    txtId.Text = producto.id.ToString();
+                    txtName.Text = producto.name.ToString();
+                    txtModel.Text = producto.model.ToString();
+                    txtQuantity.Text = producto.quantity.ToString();
+                    txtValue.Text = producto.value.ToString();
+
+                }
+                else if (e.ColumnIndex == dgvProdutos.Columns["delete"].Index)
+                {
+
+                    DialogResult dialog = MessageBox.Show("Confirma exclusão?", "Excluir",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Question);
+
+                    if (dialog == DialogResult.Yes)
+                    {
+
+
+                        bool response = producto.Delete(id);
+
+                        if (!response)
+                        {
+                            MessageBox.Show("Erro ao tentar excluir");
+                        }
+                        else
+                        {
+                            LoadProducts();
+                            CountProducts();
+                        }
+
+
+                    }
+
+                }
+
             }
             catch (Exception ex)
             {
@@ -157,11 +177,39 @@ namespace Aula2
             ClearForm();
         }
 
+
+
+        #endregion
+
+        #region Métodos Privados
+
+        private void LoadProducts()
+        {
+            product product = new product();
+            dgvProdutos.DataSource = product.GetALL();
+        }
+
+        private void ClearForm()
+        {
+            txtName.Clear();
+            txtModel.Clear();
+            txtQuantity.Clear();
+            txtValue.Clear();
+            txtId.Clear();
+
+            txtName.Focus();
+        }
+
+
         private void CountProducts()
         {
             product producto = new product();
             lblCount.Text = producto.Count().ToString();
         }
+
+        #endregion
+
+        #region Exemplo
 
         private void ExemploConversa()
         {
@@ -169,7 +217,7 @@ namespace Aula2
 
             //Valores inteiros
             short leituraShort = Convert.ToInt16(valorEntrada);
-            int leituraInt = Convert.ToInt32(valorEntrada); 
+            int leituraInt = Convert.ToInt32(valorEntrada);
             long leituraLong = Convert.ToInt64(valorEntrada);
 
             //valores decimais
@@ -177,11 +225,18 @@ namespace Aula2
             double leituraDouble = double.Parse(valorEntrada);
 
             //Boolean
-            bool leituraBool = Convert.ToBoolean(valorEntrada); 
+            bool leituraBool = Convert.ToBoolean(valorEntrada);
 
             //Data, hora, data e hora
             DateTime leituraDateTime = Convert.ToDateTime(valorEntrada);
         }
+
+        #endregion
+
+
+
+
+
     }
 
 
