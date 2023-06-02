@@ -42,18 +42,23 @@
             txtModel = new TextBox();
             txtId = new TextBox();
             dgvProdutos = new DataGridView();
-            id = new DataGridViewTextBoxColumn();
-            name = new DataGridViewTextBoxColumn();
-            model = new DataGridViewTextBoxColumn();
-            value = new DataGridViewTextBoxColumn();
-            quantity = new DataGridViewTextBoxColumn();
-            edit = new DataGridViewButtonColumn();
-            delete = new DataGridViewButtonColumn();
             btnDelete = new Button();
             btnAlterar = new Button();
             btnClear = new Button();
             lblCount = new Label();
             cbNacional = new CheckBox();
+            rbNovo = new RadioButton();
+            rbSeminovo = new RadioButton();
+            rbUsado = new RadioButton();
+            id = new DataGridViewTextBoxColumn();
+            name = new DataGridViewTextBoxColumn();
+            model = new DataGridViewTextBoxColumn();
+            value = new DataGridViewTextBoxColumn();
+            quantity = new DataGridViewTextBoxColumn();
+            national = new DataGridViewCheckBoxColumn();
+            status = new DataGridViewTextBoxColumn();
+            edit = new DataGridViewButtonColumn();
+            delete = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)dgvProdutos).BeginInit();
             SuspendLayout();
             // 
@@ -104,7 +109,7 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(143, 367);
+            btnAdd.Location = new Point(143, 383);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(112, 34);
             btnAdd.TabIndex = 5;
@@ -156,7 +161,7 @@
             dgvProdutos.AllowUserToResizeRows = false;
             dgvProdutos.BackgroundColor = SystemColors.ActiveCaptionText;
             dgvProdutos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvProdutos.Columns.AddRange(new DataGridViewColumn[] { id, name, model, value, quantity, edit, delete });
+            dgvProdutos.Columns.AddRange(new DataGridViewColumn[] { id, name, model, value, quantity, national, status, edit, delete });
             dgvProdutos.Location = new Point(316, 45);
             dgvProdutos.MultiSelect = false;
             dgvProdutos.Name = "dgvProdutos";
@@ -164,9 +169,90 @@
             dgvProdutos.RowHeadersWidth = 62;
             dgvProdutos.RowTemplate.Height = 33;
             dgvProdutos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvProdutos.Size = new Size(965, 356);
+            dgvProdutos.Size = new Size(1022, 356);
             dgvProdutos.TabIndex = 11;
             dgvProdutos.CellClick += dgvProdutos_CellClick;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(143, 425);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(112, 34);
+            btnDelete.TabIndex = 12;
+            btnDelete.Text = "Deletar";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // btnAlterar
+            // 
+            btnAlterar.Location = new Point(143, 467);
+            btnAlterar.Name = "btnAlterar";
+            btnAlterar.Size = new Size(112, 34);
+            btnAlterar.TabIndex = 13;
+            btnAlterar.Text = "Alterar";
+            btnAlterar.UseVisualStyleBackColor = true;
+            btnAlterar.Click += btnAlterar_Click;
+            // 
+            // btnClear
+            // 
+            btnClear.Location = new Point(16, 383);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(112, 118);
+            btnClear.TabIndex = 14;
+            btnClear.Text = "Limpar";
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
+            // 
+            // lblCount
+            // 
+            lblCount.AutoSize = true;
+            lblCount.Location = new Point(1280, 416);
+            lblCount.Name = "lblCount";
+            lblCount.Size = new Size(24, 25);
+            lblCount.TabIndex = 15;
+            lblCount.Text = "...";
+            // 
+            // cbNacional
+            // 
+            cbNacional.AutoSize = true;
+            cbNacional.Location = new Point(143, 337);
+            cbNacional.Name = "cbNacional";
+            cbNacional.Size = new Size(106, 29);
+            cbNacional.TabIndex = 16;
+            cbNacional.Text = "Nacional";
+            cbNacional.UseVisualStyleBackColor = true;
+            // 
+            // rbNovo
+            // 
+            rbNovo.AutoSize = true;
+            rbNovo.Checked = true;
+            rbNovo.Location = new Point(339, 416);
+            rbNovo.Name = "rbNovo";
+            rbNovo.Size = new Size(81, 29);
+            rbNovo.TabIndex = 17;
+            rbNovo.TabStop = true;
+            rbNovo.Text = "Novo";
+            rbNovo.UseVisualStyleBackColor = true;
+            // 
+            // rbSeminovo
+            // 
+            rbSeminovo.AutoSize = true;
+            rbSeminovo.Location = new Point(339, 456);
+            rbSeminovo.Name = "rbSeminovo";
+            rbSeminovo.Size = new Size(117, 29);
+            rbSeminovo.TabIndex = 18;
+            rbSeminovo.Text = "Seminovo";
+            rbSeminovo.UseVisualStyleBackColor = true;
+            // 
+            // rbUsado
+            // 
+            rbUsado.AutoSize = true;
+            rbUsado.Location = new Point(339, 491);
+            rbUsado.Name = "rbUsado";
+            rbUsado.Size = new Size(88, 29);
+            rbUsado.TabIndex = 19;
+            rbUsado.Text = "Usado";
+            rbUsado.UseVisualStyleBackColor = true;
             // 
             // id
             // 
@@ -222,6 +308,24 @@
             quantity.ReadOnly = true;
             quantity.Width = 150;
             // 
+            // national
+            // 
+            national.DataPropertyName = "national";
+            national.HeaderText = "Nacional";
+            national.MinimumWidth = 8;
+            national.Name = "national";
+            national.ReadOnly = true;
+            national.Width = 150;
+            // 
+            // status
+            // 
+            status.DataPropertyName = "status";
+            status.HeaderText = "Status";
+            status.MinimumWidth = 8;
+            status.Name = "status";
+            status.ReadOnly = true;
+            status.Width = 150;
+            // 
             // edit
             // 
             edit.HeaderText = "Edição";
@@ -242,61 +346,15 @@
             delete.UseColumnTextForButtonValue = true;
             delete.Width = 150;
             // 
-            // btnDelete
-            // 
-            btnDelete.Location = new Point(143, 409);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(112, 34);
-            btnDelete.TabIndex = 12;
-            btnDelete.Text = "Deletar";
-            btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += btnDelete_Click;
-            // 
-            // btnAlterar
-            // 
-            btnAlterar.Location = new Point(143, 451);
-            btnAlterar.Name = "btnAlterar";
-            btnAlterar.Size = new Size(112, 34);
-            btnAlterar.TabIndex = 13;
-            btnAlterar.Text = "Alterar";
-            btnAlterar.UseVisualStyleBackColor = true;
-            btnAlterar.Click += btnAlterar_Click;
-            // 
-            // btnClear
-            // 
-            btnClear.Location = new Point(16, 367);
-            btnClear.Name = "btnClear";
-            btnClear.Size = new Size(112, 118);
-            btnClear.TabIndex = 14;
-            btnClear.Text = "Limpar";
-            btnClear.UseVisualStyleBackColor = true;
-            btnClear.Click += btnClear_Click;
-            // 
-            // lblCount
-            // 
-            lblCount.AutoSize = true;
-            lblCount.Location = new Point(1280, 416);
-            lblCount.Name = "lblCount";
-            lblCount.Size = new Size(24, 25);
-            lblCount.TabIndex = 15;
-            lblCount.Text = "...";
-            // 
-            // cbNacional
-            // 
-            cbNacional.AutoSize = true;
-            cbNacional.Location = new Point(143, 321);
-            cbNacional.Name = "cbNacional";
-            cbNacional.Size = new Size(106, 29);
-            cbNacional.TabIndex = 16;
-            cbNacional.Text = "Nacional";
-            cbNacional.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             AcceptButton = btnAdd;
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1316, 512);
+            ClientSize = new Size(1357, 536);
+            Controls.Add(rbUsado);
+            Controls.Add(rbSeminovo);
+            Controls.Add(rbNovo);
             Controls.Add(cbNacional);
             Controls.Add(lblCount);
             Controls.Add(btnClear);
@@ -339,13 +397,18 @@
         private Button btnAlterar;
         private Button btnClear;
         private Label lblCount;
+        private CheckBox cbNacional;
+        private RadioButton rbNovo;
+        private RadioButton rbSeminovo;
+        private RadioButton rbUsado;
         private DataGridViewTextBoxColumn id;
         private DataGridViewTextBoxColumn name;
         private DataGridViewTextBoxColumn model;
         private DataGridViewTextBoxColumn value;
         private DataGridViewTextBoxColumn quantity;
+        private DataGridViewCheckBoxColumn national;
+        private DataGridViewTextBoxColumn status;
         private DataGridViewButtonColumn edit;
         private DataGridViewButtonColumn delete;
-        private CheckBox cbNacional;
     }
 }

@@ -25,6 +25,25 @@ namespace Aula2
             product.value = float.Parse(txtValue.Text);
             product.national = Convert.ToBoolean(cbNacional.Checked);
 
+            if (rbNovo.Checked)
+            {
+                product.status = "Novo";
+
+            }
+            else if (rbSeminovo.Checked)
+            {
+                product.status = "Seminovo";
+            }
+            else if (rbUsado.Checked)
+            {
+                product.status = "Usado";
+
+            }
+            else
+            {
+                product.status = "Não informado";
+            }
+
 
             bool response = product.Add(product);
 
@@ -62,6 +81,20 @@ namespace Aula2
                     txtModel.Text = producto.model.ToString();
                     txtQuantity.Text = producto.quantity.ToString();
                     txtValue.Text = producto.value.ToString();
+                    cbNacional.Checked = producto.national;
+
+                    if (producto.status == "Novo")
+                        rbNovo.Checked = true;
+                    else if (producto.status == "Seminovo")
+                        rbSeminovo.Checked = true;
+                    else if (producto.status == "Usado")
+                        rbUsado.Checked = true;
+                    else
+                    {
+                        rbNovo.Checked = false;
+                        rbSeminovo.Checked = false;
+                        rbUsado.Checked = false;
+                    }
 
                 }
                 else if (e.ColumnIndex == dgvProdutos.Columns["delete"].Index)
@@ -151,6 +184,26 @@ namespace Aula2
                     product.model = txtModel.Text;
                     product.quantity = Convert.ToInt32(txtQuantity.Text);
                     product.value = float.Parse(txtValue.Text);
+                    cbNacional.Checked = product.national;
+
+                    if (rbNovo.Checked)
+                    {
+                        product.status = "Novo";
+
+                    }
+                    else if (rbSeminovo.Checked)
+                    {
+                        product.status = "Seminovo";
+                    }
+                    else if (rbUsado.Checked)
+                    {
+                        product.status = "Usado";
+
+                    }
+                    else
+                    {
+                        product.status = "Não informado";
+                    }
 
 
                     bool response = product.Update(product);
@@ -165,7 +218,7 @@ namespace Aula2
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
 
@@ -196,6 +249,12 @@ namespace Aula2
             txtQuantity.Clear();
             txtValue.Clear();
             txtId.Clear();
+
+            cbNacional.Checked = false;
+
+            rbNovo.Checked = true;
+            rbSeminovo.Checked = false;
+            rbUsado.Checked = false;
 
             txtName.Focus();
         }

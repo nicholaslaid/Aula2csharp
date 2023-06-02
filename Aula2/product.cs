@@ -17,6 +17,7 @@ namespace Aula2
     public int quantity { get; set; }
     
     public bool national { get; set; }
+    public String status { get; set; }
 
        
         public bool Add(product product)
@@ -29,15 +30,16 @@ namespace Aula2
                 using(NpgsqlCommand cmd= new NpgsqlCommand())
                 {
                     cmd.CommandText = @"INSERT INTO products " +
-                        @"(name, model, quantity, value, national) " +
+                        @"(name, model, quantity, value, national, status) " +
                         @"VALUES " +
-                        @"(@name, @model, @quantity, @value, @national);";
+                        @"(@name, @model, @quantity, @value, @national, @status);";
 
                     cmd.Parameters.AddWithValue("@name", product.name);
                     cmd.Parameters.AddWithValue("@model", product.model);
                     cmd.Parameters.AddWithValue("@quantity", product.quantity);
                     cmd.Parameters.AddWithValue("@value", product.value);
                     cmd.Parameters.AddWithValue("@national", product.national);
+                    cmd.Parameters.AddWithValue("@status", product.status);
 
                     using (cmd.Connection = dba.OpenConnection())
                     {
@@ -75,7 +77,9 @@ namespace Aula2
                             result.name = reader["name"].ToString();
                             result.model = reader["model"].ToString();
                             result.quantity = Convert.ToInt32(reader["quantity"]);
-                            result.value = float.Parse(reader["value"].ToString()); 
+                            result.value = float.Parse(reader["value"].ToString());
+                            result.national = Convert.ToBoolean(reader["national"]);
+                            result.status = reader["status"].ToString();
 
                         }
                     }
@@ -112,6 +116,9 @@ namespace Aula2
                             product.model = reader["model"].ToString();
                             product.quantity = Convert.ToInt32(reader["quantity"]);
                             product.value = float.Parse(reader["value"].ToString());
+                            product.national = Convert.ToBoolean(reader["national"]);
+                            product.status = reader["status"].ToString();
+
 
                             result.Add(product);
 
@@ -171,7 +178,7 @@ namespace Aula2
                 using(NpgsqlCommand cmd = new NpgsqlCommand())
                 {
                     cmd.CommandText = @"UPDATE products " +
-                                      @"SET name = @name, model = @model, quantity = @quantity, value = @value " +
+                                      @"SET name = @name, model = @model, quantity = @quantity, value = @value, national = @national, status = @status " +
                                       @"WHERE id = @id;";
 
                     cmd.Parameters.AddWithValue("@id", product.id);
@@ -179,15 +186,17 @@ namespace Aula2
                     cmd.Parameters.AddWithValue("@model", product.model);
                     cmd.Parameters.AddWithValue("@quantity", product.quantity);
                     cmd.Parameters.AddWithValue("@value", product.value);
+                    cmd.Parameters.AddWithValue("@national", product.national);
+                    cmd.Parameters.AddWithValue("@status", product.status);
 
-                    using(cmd.Connection = dba.OpenConnection())
+                    using (cmd.Connection = dba.OpenConnection())
                     {
                         cmd.ExecuteNonQuery() ;
                         result = true;
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             { }
             return result;
         }
