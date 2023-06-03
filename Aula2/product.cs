@@ -10,6 +10,7 @@ namespace Aula2
     internal class product
     {
     public int id { get; set; }
+    public int idSeller { get; set; }
     public string name { get; set; }
     public string model { get; set; }
 
@@ -29,11 +30,12 @@ namespace Aula2
             {
                 using(NpgsqlCommand cmd= new NpgsqlCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO products " +
-                        @"(name, model, quantity, value, national, status) " +
+                    cmd.CommandText = @"INSERT INTO GU " +
+                        @"(id_seller, name, model, quantity, value, national, status) " +
                         @"VALUES " +
-                        @"(@name, @model, @quantity, @value, @national, @status);";
+                        @"(@idSeller, @name, @model, @quantity, @value, @national, @status);";
 
+                    cmd.Parameters.AddWithValue("@idSeller", product.idSeller);
                     cmd.Parameters.AddWithValue("@name", product.name);
                     cmd.Parameters.AddWithValue("@model", product.model);
                     cmd.Parameters.AddWithValue("@quantity", product.quantity);
@@ -74,6 +76,7 @@ namespace Aula2
                         if (reader.Read())
                         {
                             result.id = Convert.ToInt32(reader["id"]);
+                            result.idSeller = Convert.ToInt32(reader["idSeller"]);
                             result.name = reader["name"].ToString();
                             result.model = reader["model"].ToString();
                             result.quantity = Convert.ToInt32(reader["quantity"]);
@@ -112,6 +115,7 @@ namespace Aula2
                             product product = new product();
 
                             product.id = Convert.ToInt32(reader["id"]);
+                            product.idSeller = Convert.ToInt32(reader["idSeller"]);
                             product.name = reader["name"].ToString();
                             product.model = reader["model"].ToString();
                             product.quantity = Convert.ToInt32(reader["quantity"]);
@@ -182,6 +186,7 @@ namespace Aula2
                                       @"WHERE id = @id;";
 
                     cmd.Parameters.AddWithValue("@id", product.id);
+                    cmd.Parameters.AddWithValue("@idSeller", product.idSeller);
                     cmd.Parameters.AddWithValue("@name", product.name);
                     cmd.Parameters.AddWithValue("@model", product.model);
                     cmd.Parameters.AddWithValue("@quantity", product.quantity);

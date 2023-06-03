@@ -8,6 +8,7 @@ namespace Aula2
         {
             InitializeComponent();
             LoadProducts();
+            LoadSellers();
             CountProducts();
         }
 
@@ -17,47 +18,58 @@ namespace Aula2
         private void btnAdd_Click(object sender, EventArgs e)
         {
 
-            product product = new product();
 
-            product.name = txtName.Text;
-            product.model = txtModel.Text;
-            product.quantity = Convert.ToInt32(txtQuantity.Text);
-            product.value = float.Parse(txtValue.Text);
-            product.national = Convert.ToBoolean(cbNacional.Checked);
-
-            if (rbNovo.Checked)
+            try
             {
-                product.status = "Novo";
+                product product = new product();
 
+                product.idSeller = Convert.ToInt32(cmbSeller.SelectedValue);
+
+                product.name = txtName.Text;
+                product.model = txtModel.Text;
+                product.quantity = Convert.ToInt32(txtQuantity.Text);
+                product.value = float.Parse(txtValue.Text);
+                product.national = Convert.ToBoolean(cbNacional.Checked);
+
+                if (rbNovo.Checked)
+                {
+                    product.status = "Novo";
+
+                }
+                else if (rbSeminovo.Checked)
+                {
+                    product.status = "Seminovo";
+                }
+                else if (rbUsado.Checked)
+                {
+                    product.status = "Usado";
+
+                }
+                else
+                {
+                    product.status = "Não informado";
+                }
+
+
+                bool response = product.Add(product);
+
+
+                if (!response)
+                {
+                    MessageBox.Show("Erro ao tentar gravar o produto");
+
+                }
+                else
+                {
+                    LoadProducts();
+                    ClearForm();
+                    CountProducts();
+                }
             }
-            else if (rbSeminovo.Checked)
+            catch (Exception ex)
             {
-                product.status = "Seminovo";
-            }
-            else if (rbUsado.Checked)
-            {
-                product.status = "Usado";
-
-            }
-            else
-            {
-                product.status = "Não informado";
-            }
 
 
-            bool response = product.Add(product);
-
-
-            if (!response)
-            {
-                MessageBox.Show("Erro ao tentar gravar o produto");
-
-            }
-            else
-            {
-                LoadProducts();
-                ClearForm();
-                CountProducts();
             }
 
         }
@@ -77,11 +89,17 @@ namespace Aula2
                     producto = producto.Get(id);
 
                     txtId.Text = producto.id.ToString();
+
+                    Seller seller = new Seller();
+
+                    cmbSeller.SelectedValue = producto.idSeller;
+
                     txtName.Text = producto.name.ToString();
                     txtModel.Text = producto.model.ToString();
                     txtQuantity.Text = producto.quantity.ToString();
                     txtValue.Text = producto.value.ToString();
                     cbNacional.Checked = producto.national;
+
 
                     if (producto.status == "Novo")
                         rbNovo.Checked = true;
@@ -240,6 +258,18 @@ namespace Aula2
         {
             product product = new product();
             dgvProdutos.DataSource = product.GetALL();
+        }
+
+        private void LoadSellers()
+        {
+
+            //Carrega os dados do Combo
+            Seller seller = new Seller();
+            product product = new product();
+            cmbSeller.DataSource = seller.GetALL();
+
+            cmbSeller.DisplayMember = "name";
+            cmbSeller.ValueMember = "id";
         }
 
         private void ClearForm()

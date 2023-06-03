@@ -1,0 +1,26 @@
+DROP TABLE IF EXISTS sellers;
+CREATE TABLE IF NOT EXISTS sellers(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(50),
+	cnpj VARCHAR(50),
+	email VARCHAR(50),
+	phone VARCHAR(50)
+);
+
+INSERT INTO sellers(name, cnpj, email, phone) VALUES ('Magazine Luiza', '1111111111', 'magazine@gmail.com', '(54)99999-9999');
+INSERT INTO sellers(name, cnpj, email, phone) VALUES ('Kabum', '22222222222', 'kabum@gmail.com', '(54)88888-8888');
+INSERT INTO sellers(name, cnpj, email, phone) VALUES ('Ali Express', '33333333333333', 'ali@gmail.com', '(54)77777-7777');
+INSERT INTO sellers(name, cnpj, email, phone) VALUES ('Amazon', '444444444', 'amazon@gmail.com', '(54)66666-6666');
+
+SELECT * FROM sellers;
+
+Drop table if exists GU;
+CREATE TABLE IF NOT EXISTS GU (
+	id serial primary key,
+	id_seller INTEGER REFERENCES sellers,
+	name VARCHAR(50) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	telefone VARCHAR (50),
+	idade SMALLINT CHECK(idade>11 AND idade<76),
+	data_de_nascimento Date
+); 

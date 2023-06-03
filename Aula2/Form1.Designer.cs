@@ -50,6 +50,8 @@
             rbNovo = new RadioButton();
             rbSeminovo = new RadioButton();
             rbUsado = new RadioButton();
+            label1 = new Label();
+            cmbSeller = new ComboBox();
             id = new DataGridViewTextBoxColumn();
             name = new DataGridViewTextBoxColumn();
             model = new DataGridViewTextBoxColumn();
@@ -57,6 +59,7 @@
             quantity = new DataGridViewTextBoxColumn();
             national = new DataGridViewCheckBoxColumn();
             status = new DataGridViewTextBoxColumn();
+            seller = new DataGridViewComboBoxColumn();
             edit = new DataGridViewButtonColumn();
             delete = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)dgvProdutos).BeginInit();
@@ -161,7 +164,7 @@
             dgvProdutos.AllowUserToResizeRows = false;
             dgvProdutos.BackgroundColor = SystemColors.ActiveCaptionText;
             dgvProdutos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvProdutos.Columns.AddRange(new DataGridViewColumn[] { id, name, model, value, quantity, national, status, edit, delete });
+            dgvProdutos.Columns.AddRange(new DataGridViewColumn[] { id, name, model, value, quantity, national, status, seller, edit, delete });
             dgvProdutos.Location = new Point(316, 45);
             dgvProdutos.MultiSelect = false;
             dgvProdutos.Name = "dgvProdutos";
@@ -254,6 +257,24 @@
             rbUsado.Text = "Usado";
             rbUsado.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(598, 425);
+            label1.Name = "label1";
+            label1.Size = new Size(119, 25);
+            label1.TabIndex = 20;
+            label1.Text = "Fornecedores";
+            // 
+            // cmbSeller
+            // 
+            cmbSeller.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbSeller.FormattingEnabled = true;
+            cmbSeller.Location = new Point(598, 467);
+            cmbSeller.Name = "cmbSeller";
+            cmbSeller.Size = new Size(182, 33);
+            cmbSeller.TabIndex = 21;
+            // 
             // id
             // 
             id.DataPropertyName = "id";
@@ -326,6 +347,15 @@
             status.ReadOnly = true;
             status.Width = 150;
             // 
+            // seller
+            // 
+            seller.DataPropertyName = "cmbSeller";
+            seller.HeaderText = "Fornecedor";
+            seller.MinimumWidth = 8;
+            seller.Name = "seller";
+            seller.ReadOnly = true;
+            seller.Width = 150;
+            // 
             // edit
             // 
             edit.HeaderText = "Edição";
@@ -352,6 +382,8 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1357, 536);
+            Controls.Add(cmbSeller);
+            Controls.Add(label1);
             Controls.Add(rbUsado);
             Controls.Add(rbSeminovo);
             Controls.Add(rbNovo);
@@ -401,6 +433,8 @@
         private RadioButton rbNovo;
         private RadioButton rbSeminovo;
         private RadioButton rbUsado;
+        private Label label1;
+        private ComboBox cmbSeller;
         private DataGridViewTextBoxColumn id;
         private DataGridViewTextBoxColumn name;
         private DataGridViewTextBoxColumn model;
@@ -408,6 +442,7 @@
         private DataGridViewTextBoxColumn quantity;
         private DataGridViewCheckBoxColumn national;
         private DataGridViewTextBoxColumn status;
+        private DataGridViewComboBoxColumn seller;
         private DataGridViewButtonColumn edit;
         private DataGridViewButtonColumn delete;
     }
