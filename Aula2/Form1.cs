@@ -265,7 +265,6 @@ namespace Aula2
 
             //Carrega os dados do Combo
             Seller seller = new Seller();
-            product product = new product();
             cmbSeller.DataSource = seller.GetALL();
 
             cmbSeller.DisplayMember = "name";

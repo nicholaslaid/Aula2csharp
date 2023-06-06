@@ -19,6 +19,7 @@ namespace Aula2
     
     public bool national { get; set; }
     public String status { get; set; }
+    public String sellerName { get; set; }
 
        
         public bool Add(product product)
@@ -30,7 +31,7 @@ namespace Aula2
             {
                 using(NpgsqlCommand cmd= new NpgsqlCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO GU " +
+                    cmd.CommandText = @"INSERT INTO products " +
                         @"(id_seller, name, model, quantity, value, national, status) " +
                         @"VALUES " +
                         @"(@idSeller, @name, @model, @quantity, @value, @national, @status);";
@@ -105,7 +106,11 @@ namespace Aula2
             {
                 using (NpgsqlCommand cmd = new NpgsqlCommand())
                 {
-                    cmd.CommandText = @"SELECT * FROM products ORDER BY id;";
+                    cmd.CommandText = @"select p.id, p.id_seller, p.name, p.model, p.quantity, p.value, p.national, p.status, s.name as seller_name " +
+                    @"from products p, sellers s " +
+                    @"where p.id_seller = s.id " +
+                    @"Order by p.id;";
+
 
                     using (cmd.Connection = dba.OpenConnection())
                     using (NpgsqlDataReader reader = cmd.ExecuteReader())
@@ -115,13 +120,14 @@ namespace Aula2
                             product product = new product();
 
                             product.id = Convert.ToInt32(reader["id"]);
-                            product.idSeller = Convert.ToInt32(reader["idSeller"]);
+                            product.idSeller = Convert.ToInt32(reader["id_seller"]);
                             product.name = reader["name"].ToString();
                             product.model = reader["model"].ToString();
                             product.quantity = Convert.ToInt32(reader["quantity"]);
                             product.value = float.Parse(reader["value"].ToString());
                             product.national = Convert.ToBoolean(reader["national"]);
                             product.status = reader["status"].ToString();
+                            product.sellerName = reader["seller_name"].ToString();
 
 
                             result.Add(product);

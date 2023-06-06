@@ -14,6 +14,8 @@ INSERT INTO sellers(name, cnpj, email, phone) VALUES ('Amazon', '444444444', 'am
 
 SELECT * FROM sellers;
 
+SELECT * FROM products;
+
 Drop table if exists products;
 Create table if not exists products (
 	id serial primary key,
@@ -27,6 +29,7 @@ Create table if not exists products (
 ); 
 
 SELECT p.id, p.id_seller, p.name, p.model, p.quantity, p.value,
-p.national, p.status, p.name seller_name
+p.national, p.status, p.name as seller_name
 From products p, sellers s
 WHERE p.id_seller = s.id;
+

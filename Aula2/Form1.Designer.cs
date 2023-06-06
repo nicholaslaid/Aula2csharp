@@ -59,7 +59,7 @@
             quantity = new DataGridViewTextBoxColumn();
             national = new DataGridViewCheckBoxColumn();
             status = new DataGridViewTextBoxColumn();
-            seller = new DataGridViewComboBoxColumn();
+            seller = new DataGridViewTextBoxColumn();
             edit = new DataGridViewButtonColumn();
             delete = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)dgvProdutos).BeginInit();
@@ -349,11 +349,13 @@
             // 
             // seller
             // 
-            seller.DataPropertyName = "cmbSeller";
+            seller.DataPropertyName = "sellerName";
             seller.HeaderText = "Fornecedor";
             seller.MinimumWidth = 8;
             seller.Name = "seller";
             seller.ReadOnly = true;
+            seller.Resizable = DataGridViewTriState.True;
+            seller.SortMode = DataGridViewColumnSortMode.NotSortable;
             seller.Width = 150;
             // 
             // edit
@@ -442,7 +444,7 @@
         private DataGridViewTextBoxColumn quantity;
         private DataGridViewCheckBoxColumn national;
         private DataGridViewTextBoxColumn status;
-        private DataGridViewComboBoxColumn seller;
+        private DataGridViewTextBoxColumn seller;
         private DataGridViewButtonColumn edit;
         private DataGridViewButtonColumn delete;
     }
